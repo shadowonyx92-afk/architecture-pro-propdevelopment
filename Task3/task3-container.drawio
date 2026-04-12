@@ -1,0 +1,79 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram id="task3-container" name="Task3 Container Diagram">
+    <mxGraphModel dx="1898" dy="2542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;fontSize=18;strokeColor=#666666;fillColor=#f5f5f5;" value="" vertex="1">
+          <mxGeometry height="660" width="1580" x="240" y="-90" as="geometry" />
+        </mxCell>
+        <mxCell id="owner" parent="1" style="shape=mxgraph.c4.person;whiteSpace=wrap;html=1;fontSize=14;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#000000;" value="Собственник&#xa;[Person]" vertex="1">
+          <mxGeometry height="90" width="170" x="30" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;" value="Витрина сервисов для собственников&#xa;[Container: Mobile app(iOS, Android)]&#xa;Пользовательский интерфейс Smart Home" vertex="1">
+          <mxGeometry height="110" width="280" x="330" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tenantCore" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;" value="tenant-core-app&#xa;[Container: Kotlin, SpringBoot]&#xa;Приложение для предоставления услуг собственникам" vertex="1">
+          <mxGeometry height="110" width="260" x="700" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="tenantDb" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;" value="tenant-core-db&#xa;[Container: PostgreSQL]" vertex="1">
+          <mxGeometry height="100" width="180" x="740" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="smartAccess" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" value="smart-home-access-service&#xa;[Container: Spring Boot]&#xa;Проверка прав доступа, tenant scoping,&#xa;логика домофона и шлагбаума" vertex="1">
+          <mxGeometry height="130" width="320" x="1210" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#000000;" value="partner-smart-home-gateway&#xa;[Container: Spring Boot]&#xa;Адаптер внешнего API, валидация webhook,&#xa;mTLS, retry, rate limiting" vertex="1">
+          <mxGeometry height="130" width="320" x="1210" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="crm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#000000;" value="CRM&#xa;[Container: Kotlin, Spring Boot]&#xa;Система управления данными собственников" vertex="1">
+          <mxGeometry height="110" width="260" x="700" y="-60" as="geometry" />
+        </mxCell>
+        <mxCell id="crmDb" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;fontSize=14;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#000000;" value="crm-tenant-db&#xa;[Container: PostgreSQL]" vertex="1">
+          <mxGeometry height="100" width="180" x="1050" y="-55" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#000000;" value="auth-service-1&#xa;[Container: Keycloak]&#xa;Сервис аутентификации покупателей" vertex="1">
+          <mxGeometry height="100" width="280" x="330" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="partner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#000000;" value="Платформа партнёра Smart Home&#xa;[Software System]&#xa;Домофоны, шлагбаумы, API, события устройств" vertex="1">
+          <mxGeometry height="130" width="280" x="1230" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="owner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#4D4D4D;exitX=1.013;exitY=0.631;exitDx=0;exitDy=0;exitPerimeter=0;" target="mobile" value="Использует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="mobile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;" target="auth" value="OIDC / OAuth2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="mobile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;" target="tenantCore" value="[REST, WS]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="tenantCore" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="tenantDb" value="JDBC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="tenantCore" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;" target="smartAccess" value="REST: проверка контекста и команд">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="tenantCore" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;" target="crm" value="REST: данные собственника,&#xa;квартиры и автомобиля">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="crm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;" target="crmDb" value="JDBC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="smartAccess" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="smartDb" value="JDBC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="smartAccess" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="gateway" value="REST + mTLS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#4D4D4D;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="partner" value="HTTPS + mTLS + OAuth2 CC&#xa;Webhook + команды + статусы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oOyqZ1fD8XkJkm1-0QVs-1" parent="1" style="text;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; background-color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255)); display: inline !important;&quot;&gt;PropDevelopment — Группа сервисов ЖКУ&lt;/span&gt;" vertex="1">
+          <mxGeometry height="50" width="420" x="300" y="-70" as="geometry" />
+        </mxCell>
+        <mxCell id="smartDb" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" value="smart-home-db&#xa;[Container: PostgreSQL]&#xa;Разрешения, привязки устройств, авто, статусы" vertex="1">
+          <mxGeometry height="110" width="180" x="1600" y="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

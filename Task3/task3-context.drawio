@@ -1,0 +1,45 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2">
+  <diagram id="task3-context" name="Task3 Context Diagram">
+    <mxGraphModel dx="1234" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ownersystem" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;" value="Контур собственников PropDevelopment&lt;br&gt;[Software System]" vertex="1">
+          <mxGeometry height="140" width="300" x="620" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="owner" parent="1" style="shape=mxgraph.c4.person;whiteSpace=wrap;html=1;fontSize=14;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#000000;" value="Собственник&#xa;[Person]" vertex="1">
+          <mxGeometry height="100" width="180" x="180" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="operator" parent="1" style="shape=mxgraph.c4.person;whiteSpace=wrap;html=1;fontSize=14;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#000000;" value="Оператор УК / менеджер&#xa;[Person]" vertex="1">
+          <mxGeometry height="100" width="220" x="160" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="partner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#000000;" value="Платформа партнёра Smart Home&lt;br&gt;[Software System]" vertex="1">
+          <mxGeometry height="140" width="270" x="1150" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="crm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" value="CRM&lt;br&gt;[Container / Existing System]" vertex="1">
+          <mxGeometry height="130" width="270" x="960" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#000000;" value="auth-service-1&lt;br&gt;[Container / Existing System]" vertex="1">
+          <mxGeometry height="110" width="300" x="620" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="owner" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="ownersystem" value="Использует мобильное приложение,&#xa;открывает дверь и шлагбаум">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="operator" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;entryX=-0.006;entryY=0.821;entryDx=0;entryDy=0;entryPerimeter=0;" target="ownersystem" value="Назначает и отзывает права&#xa;доступа через внутренние процессы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="ownersystem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="partner" value="HTTPS + mTLS + OAuth2 CC&#xa;Команды, статусы, события">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="ownersystem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="crm" value="Получение данных о собственнике,&#xa;квартире, авто и связях">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="930" y="360" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="ownersystem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" target="auth" value="OIDC / OAuth2&#xa;Аутентификация пользователей">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
