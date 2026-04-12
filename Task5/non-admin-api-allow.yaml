@@ -1,0 +1,123 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-task5-apps
+  namespace: task5-network
+spec:
+  podSelector:
+    matchLabels:
+      task: task5-network
+  policyTypes:
+    - Ingress
+    - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-for-task5-apps
+  namespace: task5-network
+spec:
+  podSelector:
+    matchLabels:
+      task: task5-network
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                  - kube-dns
+                  - coredns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: non-admin-api-allow
+  namespace: task5-network
+spec:
+  podSelector:
+    matchExpressions:
+      - key: role
+        operator: In
+        values:
+          - front-end
+          - back-end-api
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchExpressions:
+              - key: role
+                operator: In
+                values:
+                  - front-end
+                  - back-end-api
+      ports:
+        - protocol: TCP
+          port: 80
+  egress:
+    - to:
+        - podSelector:
+            matchExpressions:
+              - key: role
+                operator: In
+                values:
+                  - front-end
+                  - back-end-api
+      ports:
+        - protocol: TCP
+          port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-api-allow
+  namespace: task5-network
+spec:
+  podSelector:
+    matchExpressions:
+      - key: role
+        operator: In
+        values:
+          - admin-front-end
+          - admin-back-end-api
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchExpressions:
+              - key: role
+                operator: In
+                values:
+                  - admin-front-end
+                  - admin-back-end-api
+      ports:
+        - protocol: TCP
+          port: 80
+  egress:
+    - to:
+        - podSelector:
+            matchExpressions:
+              - key: role
+                operator: In
+                values:
+                  - admin-front-end
+                  - admin-back-end-api
+      ports:
+        - protocol: TCP
+          port: 80
