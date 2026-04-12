@@ -1,0 +1,77 @@
+[
+  {
+    "category": "secret_access",
+    "timestamp": "2026-04-12T12:30:20.746145Z",
+    "verb": "get",
+    "user": "system:serviceaccount:secure-ops:monitoring",
+    "namespace": "secure-ops",
+    "resource": "secrets",
+    "name": "demo-secret",
+    "requestURI": "/api/v1/namespaces/secure-ops/secrets/demo-secret",
+    "sourceIPs": [
+      "192.168.67.1"
+    ],
+    "responseCode": 403,
+    "details": "secrets get/list request"
+  },
+  {
+    "category": "privileged_pod",
+    "timestamp": "2026-04-12T12:30:20.910629Z",
+    "verb": "create",
+    "user": "minikube-user",
+    "namespace": "secure-ops",
+    "resource": "pods",
+    "name": "privileged-pod",
+    "requestURI": "/api/v1/namespaces/secure-ops/pods?fieldManager=kubectl-client-side-apply&fieldValidation=Strict",
+    "sourceIPs": [
+      "192.168.67.1"
+    ],
+    "responseCode": 201,
+    "details": "requestObject.spec.containers[].securityContext.privileged == true"
+  },
+  {
+    "category": "exec",
+    "timestamp": "2026-04-12T12:30:20.970403Z",
+    "verb": "get",
+    "user": "minikube-user",
+    "namespace": "secure-ops",
+    "resource": "pods",
+    "name": "attacker-pod",
+    "requestURI": "/api/v1/namespaces/secure-ops/pods/attacker-pod/exec?command=cat&command=%2Fetc%2Fos-release&container=attacker-pod&stderr=true&stdout=true",
+    "sourceIPs": [
+      "192.168.67.1"
+    ],
+    "responseCode": 101,
+    "details": "kubectl exec or equivalent remote command execution"
+  },
+  {
+    "category": "cluster_admin_rolebinding",
+    "timestamp": "2026-04-12T12:30:21.131297Z",
+    "verb": "create",
+    "user": "minikube-user",
+    "namespace": "secure-ops",
+    "resource": "rolebindings",
+    "name": "escalate-binding",
+    "requestURI": "/apis/rbac.authorization.k8s.io/v1/namespaces/secure-ops/rolebindings?fieldManager=kubectl-client-side-apply&fieldValidation=Strict",
+    "sourceIPs": [
+      "192.168.67.1"
+    ],
+    "responseCode": 201,
+    "details": "rolebinding grants cluster-admin"
+  },
+  {
+    "category": "audit_policy_tamper",
+    "timestamp": "2026-04-12T12:30:21.065431Z",
+    "verb": "delete",
+    "user": "minikube-user",
+    "namespace": "secure-ops",
+    "resource": "configmaps",
+    "name": "audit-policy",
+    "requestURI": "/api/v1/namespaces/secure-ops/configmaps/audit-policy",
+    "sourceIPs": [
+      "192.168.67.1"
+    ],
+    "responseCode": 200,
+    "details": "request references audit-policy"
+  }
+]
