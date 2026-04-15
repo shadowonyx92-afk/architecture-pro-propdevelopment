@@ -1,14 +1,21 @@
 # Task7. PSP / PodSecurity / OPA Gatekeeper
 
 - `01-create-namespace.yaml` — namespace `audit-zone` с `PodSecurity restricted`
-- `02-insecure-pods.yaml` — три небезопасных pod
-- `03-secure-pods.yaml` — три исправленных pod
-- `04-gatekeeper-templates.yaml` — три шаблона политик
-- `05-gatekeeper-constraints.yaml` — три ограничения для `audit-zone`
-- `06-verify.sh` — единый скрипт проверки
+- `insecure-manifests/` — небезопасные pod
+- `secure-manifests/` — исправленные pod
+- `gatekeeper/` — templates и constraints
+- `verify/` — скрипты проверки
+- `audit-policy.yaml` — пример политики аудита
 
 ## Запуск
 
 ```bash
-bash 06-verify.sh
+kubectl apply -f 01-create-namespace.yaml
+bash verify/verify-admission.sh
+```
+
+Полная проверка:
+
+```bash
+bash verify/validate-security.sh
 ```
